@@ -1,22 +1,26 @@
-import struct
+import codecs
 import datetime
 import os
-import codecs
+import struct
+import warnings
 
 # Check for optional dependencies.
 try:
     import pandas as pd
 except:
-    print("Pandas is not installed. No support for DataFrames, HDF, or SQL.")
+    warnings.warn(
+        "Pandas is not installed. No support for DataFrames, HDF, or SQL.")
 else:
     try:
         import tables as tb
     except:
-        print("PyTables is not installed. No support for HDF output.")
+        warnings.warn(
+            "PyTables is not installed. No support for HDF output.")
     try:
         import sqlalchemy as sql
     except:
-        print("SQLalchemy is not installed. No support for SQL output.")
+        warnings.warn(
+            "SQLalchemy is not installed. No support for SQL output.")
 
 sqltypes = {
         'sqlite': {'str':'TEXT', 'float':'REAL', 'int': 'INTEGER', 
